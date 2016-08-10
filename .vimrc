@@ -1,20 +1,24 @@
-" Vundle (PluginInstall, PluginUpdate)
-set nocompatible	" this is ViM, not Vi
-filetype off			" important for Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Vundle (:PluginInstall, :PluginUpdate)
+set nocompatible
+filetype off
+if has("unix")
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+elseif has("win32")
+	set rtp+=~/vimfiles/bundle/Vundle.vim/
+	call vundle#begin('~/vimfiles/bundle')
+endif
 Plugin 'VundleVim/Vundle.vim'
 
+" Ruby Rails
 Plugin 'vim-ruby/vim-ruby'		" Ruby wrapper
 Plugin 'tpope/vim-rails'			" Rails wrapper
 Plugin 'tpope/vim-rake'				" Rake wrapper
 Plugin 'tpope/vim-bundler'		" Bundle wrapper
 Plugin 'tpope/vim-fugitive'		" Git wrapper
-Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/parenthesis
-Plugin 'tpope/vim-surround'		" Quoting/parenthesizing made simple
+Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/quote/parenthesis
+Plugin 'tpope/vim-surround'		" Quoting/parenthesizing editing
 Plugin 'tpope/vim-commentary' " Comment blocks with gc or gcc
-"Plugin 'tmhedberg/matchit'		" MatchIt for bracket auto-complete (covered by tpope/vim-surround?)
-"Plugin 'Raimondi/delimitMate'" Auto-delimiter (quotes, parath, brackets, etc) (covered by tpope/vim-surround?)
 
 " File browsing
 Plugin 'scrooloose/nerdtree'
@@ -26,15 +30,19 @@ let g:ctrlp_custom_ignore = {
 	\ }
 
 " Syntax auto-complete
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_seed_identifiers_with_syntax = 1
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading=1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global=1
 autocmd FileType ruby,eruby let g:rubycomplete_rails=1
+if has("unix")
+	Plugin 'Valloric/YouCompleteMe'
+	let g:ycm_seed_identifiers_with_syntax = 1
+elseif has ("win32")
+	set complete-=i		" for slow Ctrl-N performance (Windows only)
+endif
 
 " Session management
-"Plugin 'xolox/vim-misc'			" base class for xolox
+"Plugin 'xolox/vim-misc'			" base class for xolox plugins
 "Plugin 'xolox/vim-session'		" session manager
 "let g:session_autosave = 'yes'
 "let g:session_autoload = 'yes'
@@ -47,7 +55,7 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 set laststatus=2					" always show status line
 
-" All of your Vundle plugins must be added before the following line
+" All Vundle plugins must be added before the following line
 call vundle#end()
 
 
@@ -58,18 +66,25 @@ colorscheme solarized				" must be in ~/.vim/colors/solarized.vim
 set background=dark
 set t_Co=256								" Important! (vim.wikia.com/wiki/256_colors_in_vim)
 set encoding=utf-8
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
 set number		" enable line numbers
-set backspace=indent,eol,start		" allow backspace over whitespace
-set columns=100		" 120
-set lines=30			" 45
 winpos 0 0		" open vim window at (0, 0)
-set clipboard=unnamedplus 	" yanks go on main clipboard
 set wrap linebreak nolist
 set autowriteall
-"set scrolloff=9999		" cursor stays in vertical center
 set diffopt=vertical	" diff always opens in vertical split
+set backspace=indent,eol,start		" allow backspace over whitespace
 set nohidden		" when closing tab, remove the buffer
+if has("unix")
+	set clipboard=unnamedplus 	" yanks go on system clipboard
+	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+	set lines=30
+	set columns=100
+elseif has("win32")
+	set clipboard=unnamed 	" yanks go on system clipboard
+	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
+	set lines=62
+	set columns=140
+endif
+"set scrolloff=9999		" cursor stays in vertical center
 "let loaded_matchparen = 1		" set showmatch
 "set mat=5							" bracket blinking
 
@@ -79,9 +94,15 @@ set undolevels=1000		" number of undo's to remember
 set undoreload=10000	" when a file is edited externally and reloaded in vim
 
 " Backup, swap and undo folders
-set backupdir=~/.vim/.backup
-set directory=~/.vim/.swap
-set undodir=~/.vim/.undo
+if has("unix")
+	set backupdir=~/.vim/.backup
+	set directory=~/.vim/.swap
+	set undodir=~/.vim/.undo
+elseif("win32")
+	set backupdir=$HOME/vimfiles/backup
+	set directory=$HOME/vimfiles/swap
+	set undodir=$HOME/vimfiles/undo
+endif
 
 " Tab settings
 set tabstop=2 softtabstop=0 noexpandtab shiftwidth=2
@@ -137,27 +158,37 @@ function! HtmlTidy()
 	normal! `z	" restore cursor position
 endfunction
 
-" regex: multiline search and replace (remove all javascripts)
-" \_. = all characters including newline (ie multiline)
-" {-} = non-greedy wildcard
-"%s#<script\_.\{-}</script>##g
-" fix indents on save
-"autocmd BufWritePre <buffer> call Preserve('normal gg=G')
-
 " Save while creating all parent dirs
 if !exists('*WriteCreatingDirs')
-	function! WriteCreatingDirs()
-		execute ':silent !mkdir -p %:h'
+	function WriteCreatingDirs()
+		execute ':silent !mkdir %:h'
 		write
 	endfunction
 	command W call WriteCreatingDirs()
 endif
 
+" Folding settings
+set foldmethod=manual   " fold based on intent
+inoremap <F9> <C-O>za		" toggle fold with F9
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
+
 " Ctags for gems (guard-ctags-bundler)
 set tags+=gems.tags
 
+" regex: multiline search and replace (remove all javascripts)
+" \_. = all characters including newline (ie multiline)
+" {-} = non-greedy wildcard
+"%s#<script\_.\{-}</script>##g
+
+" Indent on save
+"autocmd BufWritePre <buffer> call Preserve('normal gg=G')
+
 " Keyboard shortcuts
 let mapleader=","								" change default leader to comma
+nnoremap k gk
+nnoremap j gj
 nnoremap <silent> gh :bp!<CR>		" buffer left
 nnoremap <silent> gl :bn!<CR>		" buffer right
 nnoremap <C-h> <C-w>h						" window left
@@ -170,24 +201,15 @@ nnoremap <S-tab> :tabprevious<CR>
 nnoremap <C-t> :tabnew<CR>
 nnoremap <C-x> :tabclose<CR>
 nnoremap <C-a> :tabe $MYVIMRC<CR>				" edit .vimrc in a new tab
-nnoremap k gk
-nnoremap j gj
-"inoremap <C-k> <C-o>gk
-"inoremap <C-j> <C-o>gj
 nnoremap <C-CR> i<CR><ESC>			" insert new line
 nnoremap <leader>w :w!<CR>			" save
 nnoremap <leader>q <C-w>q				" window quit
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>		" open NERDtree
 inoremap <C-@> <C-x><C-o>				" Ctrl-space for omnicomplete
-nnoremap <F3> ggVGg?						" ROT13 scramble
 vnoremap <F4> :execute "noautocmd vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>	" Recursive search
 vnoremap // y/<C-R>"<CR>				" search within file for highlighted word
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>	" search and replace within file
 nnoremap <silent> <F12> :call HtmlTidy()<CR>
-
-" Folding settings
-set foldmethod=manual   " fold based on intent
-inoremap <F9> <C-O>za		" toggle fold with F9
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-vnoremap <F9> zf
+"nnoremap <M-j> <C-e>						" screen down one line
+"nnoremap <M-k> <C-y>						" screen up one line
+"nnoremap <F3> ggVGg?						" ROT13 scramble
