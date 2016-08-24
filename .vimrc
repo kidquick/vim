@@ -37,7 +37,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails=1
 if has("unix")
 	Plugin 'Valloric/YouCompleteMe'
 	let g:ycm_seed_identifiers_with_syntax = 1
-elseif has ("win32")
+elseif has("win32")
 	set complete-=i		" for slow Ctrl-N performance (Windows only)
 endif
 
@@ -98,7 +98,7 @@ if has("unix")
 	set backupdir=~/.vim/.backup
 	set directory=~/.vim/.swap
 	set undodir=~/.vim/.undo
-elseif("win32")
+elseif has("win32")
 	set backupdir=$HOME/vimfiles/backup
 	set directory=$HOME/vimfiles/swap
 	set undodir=$HOME/vimfiles/undo
