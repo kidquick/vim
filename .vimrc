@@ -16,7 +16,7 @@ Plugin 'tpope/vim-rails'			" Rails wrapper
 Plugin 'tpope/vim-rake'				" Rake wrapper
 Plugin 'tpope/vim-bundler'		" Bundle wrapper
 Plugin 'tpope/vim-fugitive'		" Git wrapper
-Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/quote/parenthesis
+Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/quote/parenthesis (Ruby/C/bash only)
 Plugin 'tpope/vim-surround'		" Quoting/parenthesizing editing
 Plugin 'tpope/vim-commentary' " Comment blocks with gc or gcc
 
@@ -29,7 +29,11 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': ''
 	\ }
 
-" Syntax auto-complete
+" XHTML auto-complete
+Plugin 'alvan/vim-closetag'	" Auto-complete XHTML tags
+let g:closetag_filenames = "*.htm,*.html,*.xhtml"
+
+" Ruby auto-complete
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading=1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global=1
