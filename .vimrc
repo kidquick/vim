@@ -1,4 +1,6 @@
-" Vundle (:PluginInstall, :PluginUpdate)
+" Vundle
+" 1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" 2. :PluginInstall or :PluginUpdate
 set nocompatible
 filetype off
 if has("unix")
@@ -199,7 +201,7 @@ nnoremap <C-h> <C-w>h						" window left
 nnoremap <C-j> <C-w>j						" window down
 nnoremap <C-k> <C-w>k						" window up
 nnoremap <C-l> <C-w>l						" window right
-nnoremap <C-[> <C-t>						" tag stack back
+nnoremap <A-]> <C-t>						" tag stack back
 nnoremap <tab> :tabnext<CR>
 nnoremap <S-tab> :tabprevious<CR>
 nnoremap <C-t> :tabnew<CR>
