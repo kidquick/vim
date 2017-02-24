@@ -1,4 +1,4 @@
-" Vundle
+" Vundle Install
 " 1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " 2. :PluginInstall or :PluginUpdate
 set nocompatible
@@ -22,9 +22,11 @@ Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/quote/parenthesis (Ruby/C/
 Plugin 'tpope/vim-surround'		" Quoting/parenthesizing editing
 Plugin 'tpope/vim-commentary' " Comment blocks with gc or gcc
 
-" File browsing
+" File tree browsing
 Plugin 'scrooloose/nerdtree'
 let NERDTreeQuitOnOpen = 1
+
+" Fuzzy file searching
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\v[\/](\.git|tmp)$',
