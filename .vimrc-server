@@ -1,8 +1,10 @@
-" Vundle Install
+" Install
+" 1. wget -O ~/.vimrc https://raw.githubusercontent.com/kidquick/vim/master/.vimrc-server
 " 1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " 2. mkdir ~/.vim/colors ~/.vim/.backup ~/.vim/.swap ~/.vim/.undo
 " 3. wget -O ~/.vim/colors/solarized.vim https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 " 4. :PluginInstall or :PluginUpdate
+
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
