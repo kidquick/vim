@@ -3,24 +3,9 @@
 " 2. :PluginInstall or :PluginUpdate
 set nocompatible
 filetype off
-if has("unix")
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
-elseif has("win32")
-	set rtp+=~/vimfiles/bundle/Vundle.vim/
-	call vundle#begin('~/vimfiles/bundle')
-endif
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-
-" Ruby Rails
-Plugin 'vim-ruby/vim-ruby'		" Ruby wrapper
-Plugin 'tpope/vim-rails'			" Rails wrapper
-Plugin 'tpope/vim-rake'				" Rake wrapper
-Plugin 'tpope/vim-bundler'		" Bundle wrapper
-Plugin 'tpope/vim-fugitive'		" Git wrapper
-Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/quote/parenthesis (Ruby/C/bash only)
-Plugin 'tpope/vim-surround'		" Quoting/parenthesizing editing
-Plugin 'tpope/vim-commentary' " Comment blocks with gc or gcc
 
 " File tree browsing
 Plugin 'scrooloose/nerdtree'
@@ -36,18 +21,6 @@ let g:ctrlp_custom_ignore = {
 " XHTML auto-complete
 Plugin 'alvan/vim-closetag'	" Auto-complete XHTML tags
 let g:closetag_filenames = "*.htm,*.html,*.xhtml"
-
-" Ruby auto-complete
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading=1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global=1
-autocmd FileType ruby,eruby let g:rubycomplete_rails=1
-if has("unix")
-	Plugin 'Valloric/YouCompleteMe'
-	let g:ycm_seed_identifiers_with_syntax = 1
-elseif has("win32")
-	set complete-=i		" for slow Ctrl-N performance (Windows only)
-endif
 
 " Session management
 "Plugin 'xolox/vim-misc'			" base class for xolox plugins
@@ -75,24 +48,16 @@ set background=dark
 set t_Co=256								" Important! (vim.wikia.com/wiki/256_colors_in_vim)
 set encoding=utf-8
 set number		" enable line numbers
-winpos 0 0		" open vim window at (0, 0)
+"winpos 0 0		" open vim window at (0, 0)
 set wrap linebreak nolist
 set autowriteall
 set diffopt=vertical	" diff always opens in vertical split
 set backspace=indent,eol,start		" allow backspace over whitespace
 set nohidden		" when closing tab, remove the buffer
-if has("unix")
-	set clipboard=unnamedplus 	" yanks go on system clipboard
-	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
-	set lines=30
-	set columns=100
-elseif has("win32")
-	set clipboard=unnamed 	" yanks go on system clipboard
-	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-	set lines=62
-	set columns=140
-endif
-"set scrolloff=9999		" cursor stays in vertical center
+set clipboard=unnamedplus 	" yanks go on system clipboard
+"set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+"set lines=30
+"set columns=100
 "let loaded_matchparen = 1		" set showmatch
 "set mat=5							" bracket blinking
 
@@ -102,15 +67,9 @@ set undolevels=1000		" number of undo's to remember
 set undoreload=10000	" when a file is edited externally and reloaded in vim
 
 " Backup, swap and undo folders
-if has("unix")
-	set backupdir=~/.vim/.backup
-	set directory=~/.vim/.swap
-	set undodir=~/.vim/.undo
-elseif has("win32")
-	set backupdir=$HOME/vimfiles/backup
-	set directory=$HOME/vimfiles/swap
-	set undodir=$HOME/vimfiles/undo
-endif
+set backupdir=~/.vim/.backup
+set directory=~/.vim/.swap
+set undodir=~/.vim/.undo
 
 " Tab settings
 set tabstop=2 softtabstop=0 noexpandtab shiftwidth=2
@@ -140,6 +99,9 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Indent on save
+"autocmd BufWritePre <buffer> call Preserve('normal gg=G')
 
 " Restore cursor position, window position, and last search after running a command
 function! Preserve(command)
@@ -181,17 +143,6 @@ inoremap <F9> <C-O>za		" toggle fold with F9
 nnoremap <F9> za
 onoremap <F9> <C-C>za
 vnoremap <F9> zf
-
-" Ctags for gems (guard-ctags-bundler)
-set tags+=gems.tags
-
-" regex: multiline search and replace (remove all javascripts)
-" \_. = all characters including newline (ie multiline)
-" {-} = non-greedy wildcard
-"%s#<script\_.\{-}</script>##g
-
-" Indent on save
-"autocmd BufWritePre <buffer> call Preserve('normal gg=G')
 
 " Keyboard shortcuts
 let mapleader=","								" change default leader to comma
