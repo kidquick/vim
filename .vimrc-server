@@ -1,6 +1,8 @@
 " Vundle Install
 " 1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" 2. :PluginInstall or :PluginUpdate
+" 2. mkdir ~/.vim/colors ~/.vim/.backup ~/.vim/.swap ~/.vim/.undo
+" 3. wget -O ~/.vim/colors/solarized.vim https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+" 4. :PluginInstall or :PluginUpdate
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -31,9 +33,9 @@ let g:closetag_filenames = "*.htm,*.html,*.xhtml"
 " Airline bar
 Plugin 'powerline/powerline'
 Plugin 'bling/vim-airline'
-let g:airline_theme='bubblegum'
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
+"let g:airline_theme='bubblegum'
+"let g:airline_powerline_fonts=1
+"let g:airline#extensions#tabline#enabled=1
 set laststatus=2					" always show status line
 
 " All Vundle plugins must be added before the following line
