@@ -1,6 +1,3 @@
-" Vundle Install
-" 1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" 2. :PluginInstall or :PluginUpdate
 set nocompatible
 filetype off
 if has("unix")
@@ -17,12 +14,12 @@ Plugin 'VundleVim/Vundle.vim'
 " Ruby Rails
 "Plugin 'vim-ruby/vim-ruby'		" Ruby wrapper
 "Plugin 'tpope/vim-rails'			" Rails wrapper
-"Plugin 'tpope/vim-rake'				" Rake wrapper
+"Plugin 'tpope/vim-rake'			" Rake wrapper
 "Plugin 'tpope/vim-bundler'		" Bundle wrapper
-"Plugin 'tpope/vim-fugitive'		" Git wrapper
+"Plugin 'tpope/vim-fugitive'	" Git wrapper
 "Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/quote/parenthesis (Ruby/C/bash only)
-"Plugin 'tpope/vim-surround'		" Quoting/parenthesizing editing
-"Plugin 'tpope/vim-commentary' " Comment blocks with gc or gcc
+"Plugin 'tpope/vim-surround'	" Quoting/parenthesizing editing
+"Plugin 'tpope/vim-commentary'" Comment blocks with gc or gcc
 
 " Ruby auto-complete
 "autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -57,6 +54,9 @@ let g:closetag_filenames = "*.htm,*.html,*.xhtml"
 "let g:session_autosave = 'yes'
 "let g:session_autoload = 'yes'
 
+" Theme
+Plugin 'altercation/vim-colors-solarized.vim'
+
 " Airline bar
 Plugin 'powerline/powerline'
 Plugin 'vim-airline/vim-airline'
@@ -73,7 +73,7 @@ call vundle#end()
 " Display settings
 syntax on
 filetype plugin indent on
-colorscheme solarized				" must be in ~/.vim/colors/solarized.vim
+colorscheme solarized
 set background=dark
 set t_Co=256								" Important! (vim.wikia.com/wiki/256_colors_in_vim)
 set encoding=utf-8          " The encoding displayed
