@@ -5,7 +5,7 @@ Installation
 1. git clone git://github.com/kidquick/vim
 2. mkdir ~/.vim ~/.vim/bundle ~/.vim/.backup ~/.vim/.swap ~/.vim/.undo
 3. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-4. (Install!) sudo wget https://github.com/powerline/fonts/blob/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline.ttf?raw=true -o /usr/share/fonts
+4. (Install!) sudo wget https://github.com/powerline/fonts/blob/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline.ttf?raw=true -o /usr/share/fonts/Ubuntu\ Mono\ derivative\ Powerline.ttf
 5. :PluginInstall
 
 ### Windows
