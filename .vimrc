@@ -54,8 +54,8 @@ let g:closetag_filenames = "*.htm,*.html,*.xhtml"
 "let g:session_autosave = 'yes'
 "let g:session_autoload = 'yes'
 
-" Theme
-Plugin 'altercation/vim-colors-solarized.vim'
+" Solarized theme
+Plugin 'altercation/vim-colors-solarized'
 
 " Airline bar
 Plugin 'powerline/powerline'
