@@ -5,7 +5,7 @@ set guioptions-=L  " disable left hand scroll bar
 set guioptions-=t  " disable tearoff menu items
 "set guioptions-=m " disable menu bar
 
-" disable audio bell and visual bell (important for gvim on Windows only)
+" disable audio bell and visual bell
 if has("win32")
   set vb t_vb=
 endif
