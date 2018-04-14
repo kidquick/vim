@@ -1,3 +1,6 @@
+" Vundle Install
+" 1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" 2. :PluginInstall or :PluginUpdate
 set nocompatible
 filetype off
 if has("unix")
@@ -14,14 +17,15 @@ Plugin 'VundleVim/Vundle.vim'
 " Ruby Rails
 "Plugin 'vim-ruby/vim-ruby'		" Ruby wrapper
 "Plugin 'tpope/vim-rails'			" Rails wrapper
-"Plugin 'tpope/vim-rake'			" Rake wrapper
+"Plugin 'tpope/vim-rake'				" Rake wrapper
 "Plugin 'tpope/vim-bundler'		" Bundle wrapper
-"Plugin 'tpope/vim-fugitive'	" Git wrapper
+"Plugin 'tpope/vim-fugitive'		" Git wrapper
 "Plugin 'tpope/vim-endwise'		" Auto-insert closing tag/quote/parenthesis (Ruby/C/bash only)
-"Plugin 'tpope/vim-surround'	" Quoting/parenthesizing editing
-"Plugin 'tpope/vim-commentary'" Comment blocks with gc or gcc
+"Plugin 'tpope/vim-surround'		" Quoting/parenthesizing editing
+"Plugin 'tpope/vim-commentary' " Comment blocks with gc or gcc
 
 " Ruby auto-complete
+set omnifunc=syntaxcomplete#Complete
 "autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 "autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading=1
 "autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global=1
@@ -32,6 +36,9 @@ Plugin 'VundleVim/Vundle.vim'
 "elseif has("win32")
 "  set complete-=i		" for slow Ctrl-N performance (Windows only)
 "endif
+
+" EasyMotion (ex: <leader><leader>fa to find "a")
+Plugin 'easymotion/vim-easymotion'
 
 " File tree browsing
 Plugin 'scrooloose/nerdtree'
@@ -54,12 +61,8 @@ let g:closetag_filenames = "*.htm,*.html,*.xhtml"
 "let g:session_autosave = 'yes'
 "let g:session_autoload = 'yes'
 
-" Solarized theme
-Plugin 'altercation/vim-colors-solarized'
-
 " Airline bar
 Plugin 'powerline/powerline'
-Plugin 'powerline/fonts'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline_theme='bubblegum'
@@ -74,7 +77,7 @@ call vundle#end()
 " Display settings
 syntax on
 filetype plugin indent on
-colorscheme solarized
+colorscheme solarized				" must be in ~/.vim/colors/solarized.vim
 set background=dark
 set t_Co=256								" Important! (vim.wikia.com/wiki/256_colors_in_vim)
 set encoding=utf-8          " The encoding displayed
@@ -222,13 +225,19 @@ nnoremap <C-CR> i<CR><ESC>			" insert new line
 nnoremap <leader>w :w!<CR>			" save
 nnoremap <leader>q <C-w>q				" window quit
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>		" open NERDtree
-inoremap <C-@> <C-x><C-o>				" Ctrl-space for omnicomplete
 vnoremap <F4> :execute "noautocmd vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>	" Recursive search
 vnoremap // y/<C-R>"<CR>				" search within file for highlighted word
 nnoremap <silent> <F12> :call HtmlTidy()<CR>
-"nnoremap <M-j> <C-e>						" screen down one line
-"nnoremap <M-k> <C-y>						" screen up one line
-"nnoremap <F3> ggVGg?						" ROT13 scramble
+nnoremap <M-j> <C-e>						" screen down one line
+nnoremap <M-k> <C-y>						" screen up one line
+nnoremap <F3> ggVGg?						" ROT13 scramble
 
 " search and replace highlighted word within file
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" Ctrl-space for omnicomplete (followed by C-n or C-p)
+if has("unix")
+  inoremap <C-@> <c-x>
+elseif has("win32")
+  inoremap <C-Space> <c-x>
+endif
