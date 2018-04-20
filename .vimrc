@@ -77,8 +77,6 @@ call vundle#end()
 " Display settings
 syntax on
 filetype plugin indent on
-colorscheme solarized				" must be in ~/.vim/colors/solarized.vim
-set background=dark
 set t_Co=256								" Important! (vim.wikia.com/wiki/256_colors_in_vim)
 set encoding=utf-8          " The encoding displayed
 set fileencoding=utf-8      " The encoding written to a file
@@ -89,18 +87,20 @@ set autowriteall
 set diffopt=vertical	" diff always opens in vertical split
 set backspace=indent,eol,start		" allow backspace over whitespace
 set nohidden		" when closing tab, remove the buffer
+colorscheme solarized				" must be in ~/.vim/colors/solarized.vim
+set background=dark
 if has("unix")
-  set clipboard=unnamedplus 	" yanks go on system clipboard
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
-  set lines=30
-  set columns=100
   set fileformat=unix
+  set clipboard=unnamedplus 	" yanks go on system clipboard
+"  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+  "set lines=30
+  "set columns=100
 elseif has("win32")
+  set fileformat=dos
   set clipboard=unnamed 	" yanks go on system clipboard
   set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-  set lines=62
-  set columns=140
-  set fileformat=dos
+  "set lines=62
+  "set columns=140
 endif
 "set scrolloff=9999		" cursor stays in vertical center
 "let loaded_matchparen = 1		" set showmatch

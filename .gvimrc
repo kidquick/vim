@@ -9,3 +9,7 @@ set guioptions-=t		" disable tearoff menu items
 if has("win32")
 	set vb t_vb=
 endif
+
+" Visual theme
+colorscheme solarized				" must be in ~/.vim/colors/solarized.vim
+set background=dark
