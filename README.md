@@ -4,7 +4,7 @@ Installation
 ### Unix
     git clone https://github.com/kidquick/vim ~/.vim
     mv .gvimrc .vimrc .vimrc-server ~
-    mkdir ~/.vim ~/.vim/bundle ~/.vim/.backup ~/.vim/.swap ~/.vim/.undo
+    mkdir ~/.vim/bundle ~/.vim/.backup ~/.vim/.swap ~/.vim/.undo
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     sudo wget https://github.com/powerline/fonts/raw/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline.ttf /usr/share/fonts/Ubuntu\ Mono\ derivative\ Powerline.ttf
     wget https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim ~/.vim/colors
